@@ -28,8 +28,7 @@ class GUI:
             print(f'[WARN] cannot import dearpygui, assume without --wogui')
         self.wogui = not GUI_AVAILABLE or opt.wogui # disable gui and run in cmd
         self.cam = OrbitCamera(opt.W, opt.H, r=opt.radius, fovy=opt.fovy)
-        self.bg_color = torch.ones(3, dtype=torch.float32).cuda() # default white bg
-        # self.bg_color = torch.zeros(3, dtype=torch.float32).cuda() # black bg
+        self.bg_color = torch.zeros(3, dtype=torch.float32).cuda() # black bg
 
         self.render_buffer = np.zeros((self.W, self.H, 3), dtype=np.float32)
         self.need_update = True # camera moved, should reset accumulation
@@ -239,7 +238,7 @@ class GUI:
                     self.bg_color = torch.tensor(app_data[:3], dtype=torch.float32).cuda() # only need RGB in [0, 1]
                     self.need_update = True
                 
-                dpg.add_color_edit((255, 255, 255), label="Background Color", width=200, tag="_color_editor", no_alpha=True, callback=callback_change_bg)
+                dpg.add_color_edit((0, 0, 0), label="Background Color", width=200, tag="_color_editor", no_alpha=True, callback=callback_change_bg)
 
                 # fov slider
                 def callback_set_fovy(sender, app_data):

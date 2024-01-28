@@ -71,7 +71,7 @@ class ViserGUI:
                 self.load_mesh()
             
             # bg color
-            bg_color = self.server.add_gui_rgb("Background Color", initial_value=(255, 255, 255))
+            bg_color = self.server.add_gui_rgb("Background Color", initial_value=(0, 0, 0))
             @bg_color.on_update
             def _(_):
                 self.bg_image = np.ones((1, 1, 3), dtype=np.uint8) * np.array(bg_color.value)
